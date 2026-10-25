@@ -26,6 +26,7 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
   const [panel, setPanel] = useState<"toc" | "bookmark" | "settings" | null>(null);
   const [bookmarks, setBookmarks] = useState<BookmarkRow[]>([]);
   const [toast, setToast] = useState("");
+  const [chromeVisible, setChromeVisible] = useState(true); // 上下菜单栏可见性
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const chapterIdxRef = useRef(chapterIdx);
@@ -289,6 +290,7 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
     const x = (e.clientX - rect.left) / rect.width;
     if (x < 0.3) tapPage(-1);
     else if (x > 0.7) tapPage(1);
+    else setChromeVisible((v) => !v); // 点击中央：显示/隐藏上下菜单栏
   };
 
   // 键盘
@@ -338,7 +340,7 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
 
   return (
     <div className="reader">
-      <div className="reader-top">
+      <div className={`reader-top ${chromeVisible ? "" : "hidden"}`}>
         <button className="icon-btn" style={{ background: "transparent" }} onClick={onExit}>
           ←
         </button>
@@ -387,7 +389,7 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
         </div>
       </div>
 
-      <div className="reader-bottom">
+      <div className={`reader-bottom ${chromeVisible ? "" : "hidden"}`}>
         <div className="slider-row">
           <span className="slider-pct">{Math.round(pct * 100)}%</span>
           <input
