@@ -224,13 +224,22 @@ pub fn parse_book(file_path: &str) -> Result<ParsedBook, String> {
     })
 }
 
-/// 从字节偏移读取文本（自动处理编码），返回 UTF-8 文本
-pub fn read_at(file_path: &str, offset: u64, max_chars: usize, encoding: &str) -> Result<String, String> {
+/// 从字节偏移读取文本（自动处理编码），返回 UTF-8 文本。
+/// max_bytes 用于限定读取范围（如恰好一章的字节长度），避免越界读入后续章节。
+pub fn read_at(
+    file_path: &str,
+    offset: u64,
+    max_chars: usize,
+    encoding: &str,
+    max_bytes: u64,
+) -> Result<String, String> {
     let enc = Encoding::for_label(encoding.as_bytes()).unwrap_or(UTF_8);
     let mut f = File::open(file_path).map_err(|e| format!("打开文件失败: {e}"))?;
     f.seek(SeekFrom::Start(offset))
         .map_err(|e| format!("定位失败: {e}"))?;
-    let byte_budget = (max_chars * 4 + 64).min(4 * 1024 * 1024) as u64;
+    let byte_budget = ((max_chars * 4 + 64) as u64)
+        .min(4 * 1024 * 1024)
+        .min(if max_bytes > 0 { max_bytes } else { u64::MAX });
     let mut reader = BufReader::with_capacity(64 * 1024, f.take(byte_budget));
     let mut bytes = Vec::new();
     reader
@@ -291,7 +300,7 @@ mod tests {
         assert_eq!(parsed.chapters.len(), 11, "10 章 + 序言归入「作品相关」");
         assert_eq!(parsed.chapters[0].title, "作品相关");
         // read_at 能正确解码
-        let text = read_at(&path, parsed.chapters[4].offset, 100, "GBK").unwrap();
+        let text = read_at(&path, parsed.chapters[4].offset, 100, "GBK", 0).unwrap();
         assert!(text.contains("第4章"), "应能解码 GBK 章节内容: {}", text);
         std::fs::remove_file(&path).ok();
     }
@@ -312,7 +321,7 @@ mod tests {
         let parsed = parse_book(&path).unwrap();
         assert_eq!(parsed.encoding.to_lowercase(), "utf-8", "UTF-16 应转码为 UTF-8 存储");
         assert_eq!(parsed.chapters.len(), 2);
-        let text = read_at(&path, parsed.chapters[1].offset, 50, "utf-8").unwrap();
+        let text = read_at(&path, parsed.chapters[1].offset, 50, "utf-8", 0).unwrap();
         assert!(text.contains("第二章"));
         std::fs::remove_file(&path).ok();
     }
@@ -323,6 +332,30 @@ mod tests {
         let parsed = parse_book(&path).unwrap();
         assert_eq!(parsed.chapters.len(), 1);
         assert_eq!(parsed.chapters[0].title, "全文");
+        std::fs::remove_file(&path).ok();
+    }
+
+    #[test]
+    fn test_read_at_respects_max_bytes() {
+        // 章节内容后紧跟下一章，max_bytes 限定后不得读入下一章内容
+        let content = "第一章 开始\n本章正文到此为止。\n第二章 后续\n别的章节内容。";
+        let path = write_tmp("sr-test-boundary.txt", content.as_bytes());
+        let parsed = parse_book(&path).unwrap();
+        assert_eq!(parsed.chapters.len(), 2);
+        let ch0 = &parsed.chapters[0];
+        let ch1 = &parsed.chapters[1];
+        let full = read_at(&path, ch0.offset, 1000, "utf-8", 0).unwrap();
+        assert!(full.contains("第二章"), "不限字节数时读到后续内容");
+        let bounded = read_at(
+            &path,
+            ch0.offset,
+            1000,
+            "utf-8",
+            ch1.offset - ch0.offset,
+        )
+        .unwrap();
+        assert!(bounded.contains("本章正文"));
+        assert!(!bounded.contains("第二章"), "max_bytes 内不得混入下一章");
         std::fs::remove_file(&path).ok();
     }
 

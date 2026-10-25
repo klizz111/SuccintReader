@@ -34,6 +34,9 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
   const suppressScrollSave = useRef(false);
   const saveTimer = useRef<number>(0);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const touchMoved = useRef(false);
+  const pendingAdvance = useRef(false); // 已到章末，等待再次下滑确认跳章
+  const wheelAcc = useRef(0); // 章末滚轮累积量，达到阈值才确认，避免误触
 
   chapterIdxRef.current = chapterIdx;
   chaptersRef.current = chapters;
@@ -74,7 +77,8 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
       const ch = chs[idx];
       const nextOffset = idx + 1 < chs.length ? chs[idx + 1].offset : Number.MAX_SAFE_INTEGER;
       const len = Math.min(nextOffset - ch.offset, MAX_CHAPTER_CHARS * 4);
-      const { text } = await api.readText(book.id, ch.offset, Math.ceil(len / 4) + 100);
+      // maxChars 为字符上限，maxBytes 为章节字节长度，双重限定确保只读本章节内容
+      const { text } = await api.readText(book.id, ch.offset, Math.ceil(len), Math.ceil(len));
       suppressScrollSave.current = true;
       setChapterIdx(idx);
       setText(text);
@@ -130,7 +134,17 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
       raf = requestAnimationFrame(() => {
         const f = currentFraction();
         updatePct(chapterIdxRef.current, f);
-        if (!suppressScrollSave.current) saveProgress(chapterIdxRef.current, f);
+        if (suppressScrollSave.current) return;
+        saveProgress(chapterIdxRef.current, f);
+        // 滚入章末：标记待确认并提示；向上滚离则取消
+        if (!isAtBottom()) {
+          pendingAdvance.current = false;
+          return;
+        }
+        if (!pendingAdvance.current) {
+          pendingAdvance.current = true;
+          showToast("已到本章末尾，再次下滑进入下一章");
+        }
       });
     };
     el.addEventListener("scroll", onScroll, { passive: true });
@@ -186,9 +200,33 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
     el.scrollBy({ top: dir * lineH * 3, behavior: "smooth" });
   };
 
-  // 手势：左右滑切章，上划微调
+  const isAtBottom = () => {
+    const el = scrollRef.current;
+    return !!el && el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
+  };
+
+  // 章末顿挫确认：到达章末后第一次下滑只提示，第二次才真正跳章
+  const confirmAdvance = () => {
+    if (pendingAdvance.current) {
+      pendingAdvance.current = false;
+      nextChapter();
+    } else {
+      pendingAdvance.current = true;
+      showToast("已到本章末尾，再次下滑进入下一章");
+    }
+  };
+
+  // 手势：左右滑切章，上划微调；章末上滑走顿挫确认
   const onTouchStart = (e: React.TouchEvent) => {
     touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    touchMoved.current = false;
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    const s = touchStart.current;
+    if (!s) return;
+    const dx = e.touches[0].clientX - s.x;
+    const dy = e.touches[0].clientY - s.y;
+    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) touchMoved.current = true;
   };
   const onTouchEnd = (e: React.TouchEvent) => {
     const s = touchStart.current;
@@ -200,10 +238,57 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
       if (dx < 0) nextChapter();
       else prevChapter();
     } else if (dy < -50 && Math.abs(dy) > Math.abs(dx) * 1.5) {
-      fineTune(1);
+      // 章末需明显下滑（≥120px）才确认跳章，避免轻轻一碰就翻章
+      if (isAtBottom() && dy < -120) confirmAdvance();
+      else if (!isAtBottom()) fineTune(1);
     } else if (dy > 50 && Math.abs(dy) > Math.abs(dx) * 1.5) {
       fineTune(-1);
     }
+  };
+
+  // 桌面滚轮：章末向下滚动累积 ≥120px 才确认，单次轻滚不误触
+  const onWheel = (e: React.WheelEvent) => {
+    if (e.deltaY <= 0 || !isAtBottom()) {
+      wheelAcc.current = 0;
+      return;
+    }
+    wheelAcc.current += e.deltaY;
+    if (wheelAcc.current >= 120) {
+      wheelAcc.current = 0;
+      confirmAdvance();
+    }
+  };
+
+  // 左右点击翻页：点左 1/3 上一页、右 1/3 下一页；整屏全新内容，章首/章末自动切章（无动画）
+  const tapPage = (dir: 1 | -1) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    if (dir === 1) {
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
+      if (atBottom) {
+        nextChapter(); // 本章最后一页继续右点 → 进入下一章
+        return;
+      }
+    } else {
+      const atTop = el.scrollTop <= 2;
+      if (atTop) {
+        prevChapter(); // 本章第一页继续左点 → 返回上一章
+        return;
+      }
+    }
+    el.scrollTop += dir * el.clientHeight;
+  };
+  const onReaderClick = (e: React.MouseEvent) => {
+    if (touchMoved.current) {
+      touchMoved.current = false; // 滑动/拖动后不触发点击翻页
+      return;
+    }
+    const el = scrollRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    if (x < 0.3) tapPage(-1);
+    else if (x > 0.7) tapPage(1);
   };
 
   // 键盘
@@ -287,7 +372,10 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
         className="reader-scroll"
         ref={scrollRef}
         onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
+        onWheel={onWheel}
+        onClick={onReaderClick}
       >
         <div className="reader-content">
           {paragraphs.map((p, i) => (

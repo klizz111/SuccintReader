@@ -28,3 +28,6 @@ dist-ssr
 /src-tauri/target
 /src-tauri/gen/apple/build
 /dist
+
+
+testdata

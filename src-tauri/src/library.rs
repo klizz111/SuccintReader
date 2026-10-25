@@ -654,6 +654,7 @@ pub fn read_text(
     book_id: String,
     offset: i64,
     max_chars: i64,
+    max_bytes: i64,
 ) -> Result<TextChunk, String> {
     let conn = state.0.lock().map_err(|e| e.to_string())?;
     let (fp, enc): (String, String) = conn
@@ -663,7 +664,7 @@ pub fn read_text(
             |r| Ok((r.get(0)?, r.get(1)?)),
         )
         .map_err(|e| e.to_string())?;
-    let text = book::read_at(&fp, offset as u64, max_chars as usize, &enc)?;
+    let text = book::read_at(&fp, offset as u64, max_chars as usize, &enc, max_bytes as u64)?;
     Ok(TextChunk { text })
 }
 

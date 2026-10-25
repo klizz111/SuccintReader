@@ -69,8 +69,8 @@ export const api = {
   saveSettings: (key: string, value: unknown) =>
     invoke<void>("save_settings", { key, value }),
 
-  readText: (bookId: string, offset: number, maxChars: number) =>
-    invoke<{ text: string }>("read_text", { bookId, offset, maxChars }),
+  readText: (bookId: string, offset: number, maxChars: number, maxBytes = 0) =>
+    invoke<{ text: string }>("read_text", { bookId, offset, maxChars, maxBytes }),
 
   getBookFileStat: (bookId: string) =>
     invoke<{ file_size: number; encoding: string }>("get_book_file_stat", { bookId }),
