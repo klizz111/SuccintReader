@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api";
 import type { Book, BookmarkRow, Chapter, ReaderSettings, Volume } from "../types";
 import { DEFAULT_SETTINGS } from "../types";
+import { applyReaderSettings } from "../theme";
 import TocSheet from "../components/TocSheet";
 import BookmarkSheet from "../components/BookmarkSheet";
 import ReaderSettingsPanel from "../components/ReaderSettingsPanel";
@@ -245,20 +246,13 @@ export default function ReaderPage({ book, onExit, onOpenSettings }: Props) {
     showToast("书签已添加");
   };
 
-  const cssVars = {
-    "--reader-bg": settings.bgColor,
-    "--reader-fg": settings.textColor,
-    "--reader-font-size": `${settings.fontSize}px`,
-    "--reader-line-height": settings.lineHeight,
-    "--reader-pad-x": `${settings.paddingX}px`,
-    "--reader-pad-y": `${settings.paddingY}px`,
-    "--reader-font-family": settings.serif
-      ? '"Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif'
-      : '-apple-system, "PingFang SC", "Microsoft YaHei", sans-serif',
-  } as React.CSSProperties;
+  // 设置变化时同步到根元素 CSS 变量（进入本页时 App 已预置，这里保持后续修改生效）
+  useEffect(() => {
+    applyReaderSettings(settings);
+  }, [settings]);
 
   return (
-    <div className="reader" style={cssVars}>
+    <div className="reader">
       <div className="reader-top">
         <button className="icon-btn" style={{ background: "transparent" }} onClick={onExit}>
           ←

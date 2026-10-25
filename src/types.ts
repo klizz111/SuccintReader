@@ -68,6 +68,8 @@ export interface AiConfig {
   endpoint: string;
   apiKey: string;
   prompt: string;
+  /** 参与 AI 划分的采样字符数 */
+  sampleChars?: number;
 }
 
 export const DEFAULT_AI_PROMPT =

@@ -3,6 +3,7 @@ import ShelfPage from "./pages/ShelfPage";
 import ReaderPage from "./pages/ReaderPage";
 import SettingsPage from "./pages/SettingsPage";
 import { Book } from "./types";
+import { applyReaderSettings, loadReaderSettings } from "./theme";
 
 export type View =
   | { name: "shelf" }
@@ -35,7 +36,11 @@ export default function App() {
   return (
     <ShelfPage
       tick={shelfTick}
-      onOpenBook={(book) => setView({ name: "reader", book })}
+      onOpenBook={async (book) => {
+        // 先应用阅读主题再切换视图，避免进入阅读页时闪烁默认配色
+        applyReaderSettings(await loadReaderSettings(book.id));
+        setView({ name: "reader", book });
+      }}
       onOpenSettings={() => setView({ name: "settings" })}
     />
   );
