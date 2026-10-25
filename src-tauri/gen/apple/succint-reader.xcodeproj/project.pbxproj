@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08F6815447675CEE9E77C1E3 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64BC1FFA19DF48B5701F745A /* MetalKit.framework */; };
+		11104C79B7867E564E98294F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A0A11B2F91D50C569C0E141 /* Assets.xcassets */; };
+		1F5818165C332EB81EB78BCE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261E9228C38F557604A793AF /* CoreGraphics.framework */; };
+		2C97B8A0E9124E8F3624EC3A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F445BB05722FFD29C4FEE /* main.mm */; };
+		46A06400E4658A7750587485 /* libapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB6879CE017582E26951816 /* libapp.a */; };
+		4A4FE1E7E0B0F08E8D65FD92 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 8745B29A93C3653B0EE842F5 /* assets */; };
+		6D85E6DAC714F85D56E8CFC3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C22E87FB6F8340DBA47D2763 /* Security.framework */; };
+		81896545A6018343BB2F1F2E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E32F36D8BDEE4C1CEBD6BC73 /* Metal.framework */; };
+		8816F151AE8A02794378CE0D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 298E2150C4622F7580C5A0C8 /* QuartzCore.framework */; };
+		C6FE4CC82D00E7C3D6EB6281 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF2D4413807E251236BBBF7A /* LaunchScreen.storyboard */; };
+		EE46E499ED0B1299545EB5A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4558316A740170F0EBC349D0 /* WebKit.framework */; };
+		FF0A1C7613191CCAEBED2EA0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448CA0F51226426D315A4CA /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0448CA0F51226426D315A4CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1E1B22DBA4AADE5BED8FF674 /* lib.rs */ = {isa = PBXFileReference; path = lib.rs; sourceTree = "<group>"; };
+		260590D49C31279080AE0E72 /* bindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindings.h; sourceTree = "<group>"; };
+		261E9228C38F557604A793AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		298E2150C4622F7580C5A0C8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2D0F445BB05722FFD29C4FEE /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		3064348D4D9A5CBA9454AD94 /* backup.rs */ = {isa = PBXFileReference; path = backup.rs; sourceTree = "<group>"; };
+		4558316A740170F0EBC349D0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		4A0A11B2F91D50C569C0E141 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4E6DB1E9B16BBA2772F75519 /* db.rs */ = {isa = PBXFileReference; path = db.rs; sourceTree = "<group>"; };
+		626A548D323405B22C0EF705 /* library.rs */ = {isa = PBXFileReference; path = library.rs; sourceTree = "<group>"; };
+		64BC1FFA19DF48B5701F745A /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		7FDFCE3F677A9E561271AE1C /* main.rs */ = {isa = PBXFileReference; path = main.rs; sourceTree = "<group>"; };
+		8745B29A93C3653B0EE842F5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
+		A5D6EF0432C11753E2A159FA /* book.rs */ = {isa = PBXFileReference; path = book.rs; sourceTree = "<group>"; };
+		A6A216E0C168749E96DCD5D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C22E87FB6F8340DBA47D2763 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D40671B316123C87A7666716 /* succint-reader_iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "succint-reader_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF2D4413807E251236BBBF7A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E32F36D8BDEE4C1CEBD6BC73 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		EEB6879CE017582E26951816 /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
+		F26BBC4812BB00A35D26362C /* succint-reader_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "succint-reader_iOS.entitlements"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3D2D8023CE73CA870D0CDABB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46A06400E4658A7750587485 /* libapp.a in Frameworks */,
+				1F5818165C332EB81EB78BCE /* CoreGraphics.framework in Frameworks */,
+				81896545A6018343BB2F1F2E /* Metal.framework in Frameworks */,
+				08F6815447675CEE9E77C1E3 /* MetalKit.framework in Frameworks */,
+				8816F151AE8A02794378CE0D /* QuartzCore.framework in Frameworks */,
+				6D85E6DAC714F85D56E8CFC3 /* Security.framework in Frameworks */,
+				FF0A1C7613191CCAEBED2EA0 /* UIKit.framework in Frameworks */,
+				EE46E499ED0B1299545EB5A2 /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0190ADC29E9A8DA1B89A6BB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D40671B316123C87A7666716 /* succint-reader_iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0515E4D2B41DCE66A800F96E /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		27A43A10F640063E2B6B9565 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				261E9228C38F557604A793AF /* CoreGraphics.framework */,
+				EEB6879CE017582E26951816 /* libapp.a */,
+				E32F36D8BDEE4C1CEBD6BC73 /* Metal.framework */,
+				64BC1FFA19DF48B5701F745A /* MetalKit.framework */,
+				298E2150C4622F7580C5A0C8 /* QuartzCore.framework */,
+				C22E87FB6F8340DBA47D2763 /* Security.framework */,
+				0448CA0F51226426D315A4CA /* UIKit.framework */,
+				4558316A740170F0EBC349D0 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		27E92D533FB65D8CF156832C /* bindings */ = {
+			isa = PBXGroup;
+			children = (
+				260590D49C31279080AE0E72 /* bindings.h */,
+			);
+			path = bindings;
+			sourceTree = "<group>";
+		};
+		3F6BDC66E3FC52850D71CAF8 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				92BB03D19478E00658BC63AA /* succint-reader */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		7B9599327A6E31DF1FA16C98 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3064348D4D9A5CBA9454AD94 /* backup.rs */,
+				A5D6EF0432C11753E2A159FA /* book.rs */,
+				4E6DB1E9B16BBA2772F75519 /* db.rs */,
+				1E1B22DBA4AADE5BED8FF674 /* lib.rs */,
+				626A548D323405B22C0EF705 /* library.rs */,
+				7FDFCE3F677A9E561271AE1C /* main.rs */,
+			);
+			name = src;
+			path = ../../src;
+			sourceTree = "<group>";
+		};
+		92BB03D19478E00658BC63AA /* succint-reader */ = {
+			isa = PBXGroup;
+			children = (
+				2D0F445BB05722FFD29C4FEE /* main.mm */,
+				27E92D533FB65D8CF156832C /* bindings */,
+			);
+			path = "succint-reader";
+			sourceTree = "<group>";
+		};
+		DDD643FA0BD8563DEE1F6D49 = {
+			isa = PBXGroup;
+			children = (
+				8745B29A93C3653B0EE842F5 /* assets */,
+				4A0A11B2F91D50C569C0E141 /* Assets.xcassets */,
+				DF2D4413807E251236BBBF7A /* LaunchScreen.storyboard */,
+				0515E4D2B41DCE66A800F96E /* Externals */,
+				3F6BDC66E3FC52850D71CAF8 /* Sources */,
+				7B9599327A6E31DF1FA16C98 /* src */,
+				E63C565EF5552C9DE049E83F /* succint-reader_iOS */,
+				27A43A10F640063E2B6B9565 /* Frameworks */,
+				0190ADC29E9A8DA1B89A6BB3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E63C565EF5552C9DE049E83F /* succint-reader_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A6A216E0C168749E96DCD5D7 /* Info.plist */,
+				F26BBC4812BB00A35D26362C /* succint-reader_iOS.entitlements */,
+			);
+			path = "succint-reader_iOS";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F04A3309E88C1C426B51E40 /* succint-reader_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B9F40FC5085FECACAA1EA84 /* Build configuration list for PBXNativeTarget "succint-reader_iOS" */;
+			buildPhases = (
+				53EA2460F80AB7667ACBE909 /* Build Rust Code */,
+				8C10BF4599715C1FFB5F4792 /* Sources */,
+				3D7A26C5851C16EC36F7549D /* Resources */,
+				3D2D8023CE73CA870D0CDABB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "succint-reader_iOS";
+			packageProductDependencies = (
+			);
+			productName = "succint-reader_iOS";
+			productReference = D40671B316123C87A7666716 /* succint-reader_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A52D0A0C71AC6E53301E2016 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = E87FAD3E85A1D63600B9364E /* Build configuration list for PBXProject "succint-reader" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = DDD643FA0BD8563DEE1F6D49;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0190ADC29E9A8DA1B89A6BB3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1F04A3309E88C1C426B51E40 /* succint-reader_iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3D7A26C5851C16EC36F7549D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11104C79B7867E564E98294F /* Assets.xcassets in Resources */,
+				C6FE4CC82D00E7C3D6EB6281 /* LaunchScreen.storyboard in Resources */,
+				4A4FE1E7E0B0F08E8D65FD92 /* assets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		53EA2460F80AB7667ACBE909 /* Build Rust Code */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Rust Code";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/Externals/x86_64/${CONFIGURATION}/libapp.a",
+				"$(SRCROOT)/Externals/arm64/${CONFIGURATION}/libapp.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "pnpm tauri ios xcode-script -v --platform \"${PLATFORM_DISPLAY_NAME:?}\" --sdk-root \"${SDKROOT:?}\" --framework-search-paths \"${FRAMEWORK_SEARCH_PATHS:?}\" --header-search-paths \"${HEADER_SEARCH_PATHS:?}\" --gcc-preprocessor-definitions \"${GCC_PREPROCESSOR_DEFINITIONS:-}\" --configuration \"${CONFIGURATION:?}\" ${FORCE_COLOR} ${ARCHS:?}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8C10BF4599715C1FFB5F4792 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C97B8A0E9124E8F3624EC3A /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4776068849F4D850A8ACD529 /* release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = release;
+		};
+		7E62C1FD709734A2B4483A68 /* debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = debug;
+		};
+		A48E75AEDD90047FF7A5E140 /* release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ARCHS = (
+					arm64,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "succint-reader_iOS/succint-reader_iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
+				INFOPLIST_FILE = "succint-reader_iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.succintreader.app;
+				PRODUCT_NAME = "SuccintReader";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = release;
+		};
+		F4F424D2684C2EAE8ECBBAC8 /* debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ARCHS = (
+					arm64,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "succint-reader_iOS/succint-reader_iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
+				INFOPLIST_FILE = "succint-reader_iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.succintreader.app;
+				PRODUCT_NAME = "SuccintReader";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B9F40FC5085FECACAA1EA84 /* Build configuration list for PBXNativeTarget "succint-reader_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4F424D2684C2EAE8ECBBAC8 /* debug */,
+				A48E75AEDD90047FF7A5E140 /* release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = debug;
+		};
+		E87FAD3E85A1D63600B9364E /* Build configuration list for PBXProject "succint-reader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E62C1FD709734A2B4483A68 /* debug */,
+				4776068849F4D850A8ACD529 /* release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A52D0A0C71AC6E53301E2016 /* Project object */;
+}
